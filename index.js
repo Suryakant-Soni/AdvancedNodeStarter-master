@@ -12,7 +12,7 @@ require('./services/cache');
 
 mongoose.Promise = global.Promise;
 mongoose.connect(keys.mongoURI, {
-  useMongoClient: true
+  // useMongoClient: true
 });
 
 const app = express();
@@ -29,7 +29,7 @@ app.use(passport.session());
 
 require('./routes/authRoutes')(app);
 require('./routes/blogRoutes')(app);
-
+require('./routes/uploadRoutes')(app);
 if (['production'].includes(process.env.NODE_ENV)) {
   app.use(express.static('client/build'));
 
@@ -39,7 +39,7 @@ if (['production'].includes(process.env.NODE_ENV)) {
   });
 }
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {
   console.log(`Listening on port`, PORT);
 });
